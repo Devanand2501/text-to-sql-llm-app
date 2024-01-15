@@ -26,8 +26,18 @@ def read_queries(query, cur):
         rows = cur.fetchall()
         return rows
     except mysql.connector.Error as err:
-        st.error(f"MySQL Error: {err}")
-        return None
+        if "Table" in str(err) and "doesn't exist" in str(err):
+            query = query.replace("FROM ", "FROM `").replace("SELECT ", "SELECT `").replace(" WHERE", "` WHERE")
+            try:
+                cur.execute(query)
+                rows = cur.fetchall()
+                return rows
+            except mysql.connector.Error as inner_err:
+                st.error(f"MySQL Error: {inner_err}")
+                return None
+        else:
+            st.error(f"MySQL Error: {err}")
+            return None
 
 prompt=[
     """
