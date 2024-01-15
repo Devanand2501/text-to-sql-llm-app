@@ -27,7 +27,7 @@ def read_queries(query, cur):
         return rows
     except mysql.connector.Error as err:
         if "Table" in str(err) and "doesn't exist" in str(err):
-            query = query.replace("FROM ", "FROM `").replace("SELECT ", "SELECT `").replace(" WHERE", "` WHERE")
+            query = query.replace("FROM ", "FROM ").replace("SELECT ", "SELECT ").replace(" WHERE", " WHERE")
             try:
                 cur.execute(query)
                 rows = cur.fetchall()
