@@ -1,4 +1,4 @@
-import mysql.connector
+import psycopg2
 from dotenv import load_dotenv
 
 import os 
@@ -18,7 +18,7 @@ print(port)
 
 # Connection
 try:
-    conn = mysql.connector.connect(
+    conn = psycopg2.connect(
         database=db_name,
         host = host,
         port = port,
@@ -27,7 +27,7 @@ try:
     )
     cur = conn.cursor()
     print("Connection Successful")
-except mysql.connector.Error as err:
+except psycopg2.Error as err:
     print(err)
 
 table = """
