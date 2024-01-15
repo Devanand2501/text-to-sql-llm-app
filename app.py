@@ -7,7 +7,7 @@ load_dotenv()
 
 import os 
 import streamlit as st 
-import mysql.connector
+import psycopg2
 import google.generativeai as genai
 
 # Api key configuration
@@ -25,7 +25,7 @@ def read_queries(query, cur):
         cur.execute(query)
         rows = cur.fetchall()
         return rows
-    except mysql.connector.Error as err:
+    except psycopg2.Error as err:
         st.error(f"MySQL Error: {err}")
         return None
 
@@ -47,7 +47,7 @@ def main():
     st.set_page_config(page_title="SQL query retrieval")
     st.header("Prompt To SQL Query Converter :male-technologist:")
 
-    conn = mysql.connector.connect(
+    conn = psycopg2.connect(
         database=st.secrets["DB_NAME"],
         host = st.secrets["DB_HOST_NAME"],
         user = st.secrets["DB_USER_NAME"],
