@@ -43,7 +43,7 @@ table = """
 """
 cur.execute(table)
 
-# Creating Sample Records
+# Creating Sample Records ok
 data_to_insert = [
     (101, 'Amit Kumar', 'amit@example.com', 'Data Science', 'A', 85),
     (102, 'Priya Sharma', 'priya@example.com', 'Web Developer', 'B', 78),
