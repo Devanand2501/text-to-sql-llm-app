@@ -51,6 +51,7 @@ def main():
         database=st.secrets["DB_NAME"],
         host = st.secrets["DB_HOST_NAME"],
         user = st.secrets["DB_USER_NAME"],
+        port = st.secrets['DB_PORT'],
         password = st.secrets["DB_PASSWORD"]
     )
     cursor = conn.cursor()
