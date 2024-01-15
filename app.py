@@ -11,7 +11,8 @@ import mysql.connector
 import google.generativeai as genai
 
 # Api key configuration
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+# genai.configure(api_key=os.getenv("GOOGLE_API_KEY")) --> If you are running on local host
+genai.configure(api_key=st.secrets["GOOGLE_API_KEY"]) 
 
 # Function to return sql queries
 def get_sql_queries(prompt,question):
@@ -47,10 +48,10 @@ def main():
     st.header("Prompt To SQL Query Converter :male-technologist:")
 
     conn = mysql.connector.connect(
-        database=os.getenv("DB_NAME"),
-        host = os.getenv("DB_HOST_NAME"),
-        user = os.getenv("DB_USER_NAME"),
-        password = os.getenv("DB_PASSWORD")
+        database=st.secrets["DB_NAME"],
+        host = st.secrets["DB_HOST_NAME"],
+        user = st.secrets["DB_USER_NAME"],
+        password = st.secrets["DB_PASSWORD"]
     )
     cursor = conn.cursor()
     table = read_queries("SELECT * FROM student",cur=cursor)
