@@ -1,4 +1,4 @@
-import psycopg2
+import psycopg
 from dotenv import load_dotenv
 
 import os 
@@ -18,7 +18,7 @@ print(port)
 
 # Connection
 try:
-    conn = psycopg2.connect(
+    conn = psycopg.connect(
         database=db_name,
         host = host,
         port = port,
@@ -27,7 +27,7 @@ try:
     )
     cur = conn.cursor()
     print("Connection Successful")
-except psycopg2.Error as err:
+except psycopg.Error as err:
     print(err)
 
 table = """
